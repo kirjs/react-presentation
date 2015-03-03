@@ -3,11 +3,8 @@ var React = require('react');
 module.exports = React.createClass({
   render() {
     var className = 'slide ' + this.props.className;
-    var css = {
-      width: this.props.width,
-      height: this.props.height
-    };
-    return <div id = {this.props.id} style = {css} className = {className}>
+
+    return <div id = {this.props.id} className = {className}>
             {this.props.children}
     </div>;
   }

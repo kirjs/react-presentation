@@ -25,7 +25,8 @@ module.exports = React.createClass({
     return {
       flux,
       slideWidth: 1280,
-      slideHeight: 768
+      slideHeight: 768,
+      mode: 'single'
     };
   },
 
@@ -48,13 +49,28 @@ module.exports = React.createClass({
     return this.getFlux().store("PresentationStore").getState();
   },
 
-  render() {
-    var slide = this.props.children[this.state.slideIndex];
-    var props = update(slide.props, {
-      width: {$set: this.props.slideWidth},
-      height: {$set: this.props.slideHeight}
-    });
+  getSizes() {
+    return {
+      width: this.props.slideWidth,
+      height: this.props.slideHeight
+    }
+  },
 
-    return <Slide {...props}></Slide>;
+  renderModes: {
+    single() {
+      var slide = this.props.children[this.state.slideIndex];
+      return (
+        <div className = "presentation">
+          <div className = "slide-wrapper" style = {this.getSizes()}>
+          {slide}
+          </div>
+        </div>
+      );
+    }
+  },
+
+  render() {
+    return this.renderModes[this.props.mode].call(this);
   }
+
 });
