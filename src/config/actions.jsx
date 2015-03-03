@@ -1,0 +1,15 @@
+var actionNames = require('./actionNames');
+module.exports = {
+  nextSlide() {
+    this.dispatch(actionNames.nextSlide);
+  },
+  previousSlide() {
+    this.dispatch(actionNames.previousSlide);
+  },
+  updateSlides: function (slides) {
+    this.dispatch(actionNames.updateSlides, slides);
+  },
+  updateSlideIndex(number) {
+    this.dispatch(actionNames.updateSlideIndex, number);
+  }
+};
