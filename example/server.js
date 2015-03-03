@@ -5,12 +5,11 @@ var open = require('open');
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.path,
   hot: true
-
-}).listen(3000, 'localhost', function (err, result) {
+}).listen(config.server.port, 'localhost', function (err, result) {
     if (err) {
       console.log(err);
     }
 
-    console.log('Listening at localhost:3000');
-    open('http://localhost:3000');
+    console.log('Listening at localhost:' + config.server.port);
+    open('http://localhost:' + config.server.port);
   });

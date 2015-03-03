@@ -1,10 +1,14 @@
 var webpack = require('webpack');
 
-module.exports = {
+var serverConfig = {
+  host: 'localhost',
+  port: 3007
+};
+var config = {
   watch: true,
   entry: [
     'webpack/hot/only-dev-server',
-    'webpack-dev-server/client?http://localhost:3000',
+    'webpack-dev-server/client?http://localhost:' + serverConfig.port,
     './index.jsx'
   ],
 
@@ -19,9 +23,13 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    publicPath: 'http://localhost:3000/',
+    publicPath: 'http://localhost:' + serverConfig.port + '/',
     path: '/js/',
     filename: 'index.js'
   }
 
+
 };
+config.server = serverConfig;
+
+module.exports = config;
