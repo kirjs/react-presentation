@@ -14,7 +14,6 @@ var stores = {
 };
 
 var flux = new Fluxxor.Flux(stores, actions);
-new History(flux.store('PresentationStore'), flux.actions.updateSlideIndex);
 
 
 module.exports = React.createClass({
@@ -27,6 +26,11 @@ module.exports = React.createClass({
 
   componentDidMount() {
     this.getFlux().actions.updateSlides(this.props.children);
+    this.history = new History(flux.store('PresentationStore'), flux.actions.updateSlideIndex);
+    this.history.attach();
+  },
+  componentWillUnmount() {
+    this.history.detach();
   },
 
   getStateFromFlux() {
