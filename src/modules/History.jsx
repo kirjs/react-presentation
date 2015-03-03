@@ -1,17 +1,18 @@
-var actions = require('./../config/actions.jsx');
 class History {
-  constructor(store, slideNumberCallback) {
+  constructor(store, slideIndexCallback) {
     this.store = store;
-    window.addEventListener('popstate', function () {
-      var slideNumber = Number(window.location.hash.substr(1));
-      if (!isNaN(slideNumber)) {
-        slideNumberCallback(slideNumber);
-      }
-    });
-    store.on('change', this.updateSlideIndex.bind(this))
+    this.slideIndexCallback = slideIndexCallback;
+    this.attach();
   }
 
-  updateSlideIndex(number) {
+  updateSlideIndex() {
+    var slideIndex = Number(window.location.hash.substr(1));
+    if (!isNaN(slideIndex)) {
+      this.slideIndexCallback(slideIndex);
+    }
+  }
+
+  updateLocation() {
     var index = this.store.getState().slideIndex;
     var url = window.location.href;
     if (window.location.hash !== '') {
@@ -19,10 +20,20 @@ class History {
     } else {
       url = url + '#0';
     }
-
     history.pushState(null, null, url);
   }
 
+  attach() {
+    window.addEventListener('popstate', this.updateSlideIndex);
+    this.store.on('change', this.updateLocation.bind(this));
+
+  }
+
+  detach() {
+    window.removeEventListener('popstate', this.updateSlideIndex);
+    store.removeListener('popstate', this.updateLocation);
+
+  }
 }
 
 module.exports = History;
