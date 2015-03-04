@@ -59,8 +59,9 @@ module.exports = React.createClass({
   render() {
     invariant(renderers[this.state.renderer], 'Invalid renderer: "%s"', this.state.renderer);
     var Renderer = renderers[this.state.renderer];
+    var classNames = 'presentation ' + this.state.renderer;
     return (
-      <div className = "presentation">
+      <div className = {classNames}>
         <Renderer sizes = {this.getSizes()} store = {this.getFlux().store("PresentationStore")}></Renderer>
       </div>
     );

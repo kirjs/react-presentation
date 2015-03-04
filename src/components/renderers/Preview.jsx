@@ -16,6 +16,6 @@ module.exports = React.createClass({
       );
     });
 
-    return <div className = "preview">{slides}</div>;
+    return <div>{slides}</div>;
   }
 });
