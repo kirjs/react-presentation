@@ -64,13 +64,18 @@ li, li {
 
 }
 
-.preview {
+.presentation.single .slide-wrapper,.presentation.booklet .slide-wrapper {
+    margin: 0 auto;
+
+}
+
+.presentation.preview {
     zoom: 0.23;
     padding: 4%;
     overflow: hidden;
 }
 
-.preview .slide-wrapper {
+.presentation.preview .slide-wrapper {
     float: left;
     padding-right: 2%;
     padding-bottom: 2%;
