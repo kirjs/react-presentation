@@ -6,6 +6,7 @@ var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var PresentationStore = require('../stores/PresentationStore.jsx');
 var ShortcutStore = require('../stores/ShortcutStore.jsx');
 var History = require('../modules/History.jsx');
+var PrintStyles = require('../modules/PrintStyles.jsx');
 var Resizing = require('../modules/Resizing.jsx');
 var SingleSlide = require('./renderers/SingleSlide.jsx');
 var Booklet = require('./renderers/Booklet.jsx');
@@ -26,7 +27,6 @@ module.exports = React.createClass({
       flux,
       slideWidth: 1280,
       slideHeight: 768
-
     };
   },
 
@@ -34,15 +34,15 @@ module.exports = React.createClass({
     this.getFlux().actions.updateSlides(this.props.children);
     this.history = new History(flux.store('PresentationStore'), flux.actions.updateSlideIndex);
     this.history.attach();
-    this.resizing = new Resizing({
-      width: this.props.slideWidth,
-      height: this.props.slideHeight
-    });
+    this.resizing = new Resizing(this.getSizes());
     this.resizing.attach();
+    this.printStyles = new PrintStyles(this.getSizes());
+    this.printStyles.attach();
   },
   componentWillUnmount() {
     this.history.detach();
     this.resizing.detach();
+    this.printStyles.detach();
   },
 
   getStateFromFlux() {

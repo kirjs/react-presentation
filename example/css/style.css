@@ -3,6 +3,12 @@ html, body {
     margin: 0;
 }
 
+@media print {
+    body {
+        zoom: 1 !important;
+    }
+}
+
 body {
 
     font-family: sans-serif;
