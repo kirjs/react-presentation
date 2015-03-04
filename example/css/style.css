@@ -63,3 +63,15 @@ li, li {
     line-height: 70px;
 
 }
+
+.preview {
+    zoom: 0.23;
+    width: 200%;
+    padding: 1%;
+    overflow: hidden;
+}
+
+.preview .slide-wrapper {
+    float: left;
+    padding-right: 1%;
+}
