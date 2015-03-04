@@ -5,19 +5,22 @@ var React = require('react');
 module.exports = Fluxxor.createStore({
     getState: function () {
       return {
-        slideIndex: this.slideIndex
+        slideIndex: this.slideIndex,
+        renderer: this.renderer
       }
     },
 
     initialize() {
       this.slideIndex = 0;
       this.slides = [];
+      this.renderer = 'single';
 
       this.bindActions(
         actionNames.nextSlide, this.nextSlide,
         actionNames.previousSlide, this.previousSlide,
         actionNames.updateSlides, this.updateSlides,
-        actionNames.updateSlideIndex, this.updateSlideIndex
+        actionNames.updateSlideIndex, this.updateSlideIndex,
+        actionNames.updateRenderer, this.updateRenderer
       )
     },
     getAllSlides: function () {
@@ -25,6 +28,10 @@ module.exports = Fluxxor.createStore({
     },
     getCurrentSlide: function () {
       return this.slides[this.slideIndex] || null;
+    },
+    updateRenderer: function( renderer ){
+      this.renderer = renderer;
+      this.emit("change");
     },
 
     updateSlides(slides) {

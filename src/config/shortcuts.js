@@ -1,7 +1,9 @@
 var actions = require('./actions.jsx');
 module.exports = {
   'page down': actions.nextSlide,
+  'right': actions.nextSlide,
   'page up': actions.previousSlide,
   'left': actions.previousSlide,
-  'right': actions.nextSlide
+  's': actions.useSingleRenderer,
+  'b': actions.useBookletRenderer
 };

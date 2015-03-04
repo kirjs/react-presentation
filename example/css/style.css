@@ -34,6 +34,12 @@ p {
     font-size: 40px;
 }
 
+@media screen {
+    .slide-wrapper.current .slide {
+        background: #ddd;
+    }
+}
+
 .slide {
     background: #ffffff;
     width: 100%;

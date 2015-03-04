@@ -9,6 +9,7 @@ var History = require('../modules/History.jsx');
 var PrintStyles = require('../modules/PrintStyles.jsx');
 var Resizing = require('../modules/Resizing.jsx');
 var SingleSlide = require('./renderers/SingleSlide.jsx');
+var renderers = require('./renderers/renderers');
 var Booklet = require('./renderers/Booklet.jsx');
 
 
@@ -46,7 +47,7 @@ module.exports = React.createClass({
   },
 
   getStateFromFlux() {
-    return {};
+    return this.getFlux().store("PresentationStore").getState();
   },
 
   getSizes() {
@@ -57,7 +58,7 @@ module.exports = React.createClass({
   },
 
   render() {
-    var Renderer = Booklet;
+    var Renderer = renderers[this.state.renderer];
     return (
       <div className = "presentation">
         <Renderer sizes = {this.getSizes()} store = {this.getFlux().store("PresentationStore")}></Renderer>

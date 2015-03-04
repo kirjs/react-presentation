@@ -2,5 +2,6 @@ module.exports = {
   nextSlide: 'nextSlide',
   previousSlide: 'previousSlide',
   updateSlideIndex: 'updateSlideIndex',
-  updateSlides: 'updateSlides'
+  updateSlides: 'updateSlides',
+  updateRenderer: 'updateRenderer'
 };

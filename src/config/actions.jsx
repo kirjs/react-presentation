@@ -11,5 +11,11 @@ module.exports = {
   },
   updateSlideIndex(number) {
     this.dispatch(actionNames.updateSlideIndex, number);
+  },
+  useSingleRenderer() {
+    this.dispatch(actionNames.updateRenderer, 'single');
+  },
+  useBookletRenderer() {
+    this.dispatch(actionNames.updateRenderer, 'booklet');
   }
 };
