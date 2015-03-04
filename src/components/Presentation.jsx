@@ -8,9 +8,8 @@ var ShortcutStore = require('../stores/ShortcutStore.jsx');
 var History = require('../modules/History.jsx');
 var PrintStyles = require('../modules/PrintStyles.jsx');
 var Resizing = require('../modules/Resizing.jsx');
-var SingleSlide = require('./renderers/SingleSlide.jsx');
 var renderers = require('./renderers/renderers');
-var Booklet = require('./renderers/Booklet.jsx');
+var invariant = require('invariant');
 
 
 var stores = {
@@ -58,6 +57,7 @@ module.exports = React.createClass({
   },
 
   render() {
+    invariant(renderers[this.state.renderer], 'Invalid renderer: "%s"', this.state.renderer);
     var Renderer = renderers[this.state.renderer];
     return (
       <div className = "presentation">
