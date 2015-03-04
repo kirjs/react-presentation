@@ -5,5 +5,6 @@ module.exports = {
   'page up': actions.previousSlide,
   'left': actions.previousSlide,
   's': actions.useSingleRenderer,
-  'b': actions.useBookletRenderer
+  'b': actions.useBookletRenderer,
+  'p': actions.usePreviewRenderer
 };

@@ -17,5 +17,8 @@ module.exports = {
   },
   useBookletRenderer() {
     this.dispatch(actionNames.updateRenderer, 'booklet');
+  },
+  usePreviewRenderer() {
+    this.dispatch(actionNames.updateRenderer, 'preview');
   }
 };
