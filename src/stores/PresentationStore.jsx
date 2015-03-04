@@ -20,6 +20,12 @@ module.exports = Fluxxor.createStore({
         actionNames.updateSlideIndex, this.updateSlideIndex
       )
     },
+    getAllSlides: function () {
+      return this.slides;
+    },
+    getCurrentSlide: function () {
+      return this.slides[this.slideIndex] || null;
+    },
 
     updateSlides(slides) {
       this.slides = slides;

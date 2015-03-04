@@ -1,5 +1,4 @@
 var React = require('react/addons');
-var update = React.addons.update;
 var actions = require('../config/actions.jsx');
 var Fluxxor = require('fluxxor');
 var FluxMixin = Fluxxor.FluxMixin(React);
@@ -8,7 +7,7 @@ var PresentationStore = require('../stores/PresentationStore.jsx');
 var ShortcutStore = require('../stores/ShortcutStore.jsx');
 var History = require('../modules/History.jsx');
 var Resizing = require('../modules/Resizing.jsx');
-var Slide = require('./Slide.jsx');
+var SingleSlide = require('./renderers/SingleSlide.jsx');
 
 
 var stores = {
@@ -25,8 +24,8 @@ module.exports = React.createClass({
     return {
       flux,
       slideWidth: 1280,
-      slideHeight: 768,
-      mode: 'single'
+      slideHeight: 768
+
     };
   },
 
@@ -46,7 +45,7 @@ module.exports = React.createClass({
   },
 
   getStateFromFlux() {
-    return this.getFlux().store("PresentationStore").getState();
+    return {};
   },
 
   getSizes() {
@@ -56,21 +55,16 @@ module.exports = React.createClass({
     }
   },
 
-  renderModes: {
-    single() {
-      var slide = this.props.children[this.state.slideIndex];
-      return (
-        <div className = "presentation">
-          <div className = "slide-wrapper" style = {this.getSizes()}>
-          {slide}
-          </div>
-        </div>
-      );
-    }
-  },
-
   render() {
-    return this.renderModes[this.props.mode].call(this);
+    var Renderer = SingleSlide;
+    return (
+      <div className = "presentation">
+        <div className = "slide-wrapper" style = {this.getSizes()}>
+          <Renderer store = {this.getFlux().store("PresentationStore")}></Renderer>
+        </div>
+      </div>
+    );
+
   }
 
 });
