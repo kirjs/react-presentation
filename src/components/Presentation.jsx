@@ -8,6 +8,7 @@ var ShortcutStore = require('../stores/ShortcutStore.jsx');
 var History = require('../modules/History.jsx');
 var Resizing = require('../modules/Resizing.jsx');
 var SingleSlide = require('./renderers/SingleSlide.jsx');
+var Booklet = require('./renderers/Booklet.jsx');
 
 
 var stores = {
@@ -56,12 +57,10 @@ module.exports = React.createClass({
   },
 
   render() {
-    var Renderer = SingleSlide;
+    var Renderer = Booklet;
     return (
       <div className = "presentation">
-        <div className = "slide-wrapper" style = {this.getSizes()}>
-          <Renderer store = {this.getFlux().store("PresentationStore")}></Renderer>
-        </div>
+        <Renderer sizes = {this.getSizes()} store = {this.getFlux().store("PresentationStore")}></Renderer>
       </div>
     );
 
