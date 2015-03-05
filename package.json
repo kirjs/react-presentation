@@ -9,15 +9,15 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "react": "*"
+    "react": "^0.12.2"
   },
   "devDependencies": {
     "jsx-loader": "^0.12.2",
     "webpack": "^1.5.3",
     "fluxxor": "^1.5.2",
     "invariant": "^2.0.0",
-    "keymaster": "^1.6.2",
-    "react": "^0.12.2"
+    "keymaster": "^1.6.2"
+
   },
   "dependencies": {}
 }
