@@ -1,6 +1,6 @@
 {
   "name": "react-presentation",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React component for creating presentations with React",
   "main": "dist/index.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "fluxxor": "^1.5.2",
     "invariant": "^2.0.0",
     "keymaster": "^1.6.2"
-
   },
   "dependencies": {}
 }
