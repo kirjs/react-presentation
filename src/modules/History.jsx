@@ -2,6 +2,7 @@ class History {
   constructor(store, slideIndexCallback) {
     this.store = store;
     this.slideIndexCallback = slideIndexCallback;
+    this.updateSlideIndex();
   }
 
   updateSlideIndex() {
