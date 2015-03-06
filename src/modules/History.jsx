@@ -2,7 +2,9 @@ class History {
   constructor(store, slideIndexCallback) {
     this.store = store;
     this.slideIndexCallback = slideIndexCallback;
+    this.updateSlideIndexCallback = this.updateSlideIndex.bind(this);
     this.updateSlideIndex();
+    this.updateLocation();
   }
 
   updateSlideIndex() {
@@ -24,13 +26,14 @@ class History {
   }
 
   attach() {
-    window.addEventListener('popstate', this.updateSlideIndex);
+
+    window.addEventListener('popstate', this.updateSlideIndexCallback);
     this.store.on('change', this.updateLocation.bind(this));
 
   }
 
   detach() {
-    window.removeEventListener('popstate', this.updateSlideIndex);
+    window.removeEventListener('popstate', this.updateSlideIndexCallback);
     store.removeListener('popstate', this.updateLocation);
 
   }
