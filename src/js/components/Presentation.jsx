@@ -30,8 +30,17 @@ module.exports = React.createClass({
     };
   },
 
+  normalizeChildren(children) {
+    var count = React.Children.count(children);
+    if (count === 0) {
+      throw new Error("Please add at least one slide ");
+    }
+
+    return count === 1 ? [children] : children;
+  },
+
   componentDidMount() {
-    this.getFlux().actions.updateSlides(this.props.children);
+    this.getFlux().actions.updateSlides(this.normalizeChildren(this.props.children));
     this.history = new History(flux.store('PresentationStore'), flux.actions.updateSlideIndex);
     this.history.attach();
     this.resizing = new Resizing(this.getSizes());
@@ -65,7 +74,6 @@ module.exports = React.createClass({
         <Renderer sizes = {this.getSizes()} store = {this.getFlux().store("PresentationStore")}></Renderer>
       </div>
     );
-
   }
 
 });
