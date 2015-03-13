@@ -7,10 +7,9 @@ var PresentationStore = require('../stores/PresentationStore.jsx');
 var ShortcutStore = require('../stores/ShortcutStore.jsx');
 var History = require('../modules/History.jsx');
 var PrintStyles = require('../modules/PrintStyles.jsx');
-var Resizing = require('../modules/Resizing.jsx');
 var renderers = require('./renderers/renderers');
 var invariant = require('invariant');
-
+var ResizingMixin = require('../mixins/Resizing.jsx');
 
 var stores = {
   PresentationStore: new PresentationStore(),
@@ -21,7 +20,7 @@ var flux = new Fluxxor.Flux(stores, actions);
 
 
 module.exports = React.createClass({
-  mixins: [FluxMixin, StoreWatchMixin("PresentationStore")],
+  mixins: [FluxMixin, ResizingMixin, StoreWatchMixin("PresentationStore")],
   getDefaultProps() {
     return {
       flux,
@@ -37,20 +36,19 @@ module.exports = React.createClass({
     }
 
     return count === 1 ? [children] : children;
+
   },
 
   componentDidMount() {
     this.getFlux().actions.updateSlides(this.normalizeChildren(this.props.children));
     this.history = new History(flux.store('PresentationStore'), flux.actions.updateSlideIndex);
     this.history.attach();
-    this.resizing = new Resizing(this.getSizes());
-    this.resizing.attach();
+
     this.printStyles = new PrintStyles(this.getSizes());
     this.printStyles.attach();
   },
   componentWillUnmount() {
     this.history.detach();
-    this.resizing.detach();
     this.printStyles.detach();
   },
 
